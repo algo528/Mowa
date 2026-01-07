@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Mowa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #9affffdc 0%, #cff7fe 100%);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 85%;
+            max-width: 400px;
+        }
+
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 4px solid white;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 { font-size: 1.8rem; margin: 10px 0; }
+        h2 { font-size: 1.4rem; font-weight: 300; }
+
+        .btn-surprise {
+            background: white;
+            color: #ff6b6b;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .btn-surprise:hover { transform: scale(1.1); }
+
+        #hidden-message {
+            display: none;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 1.1rem;
+            animation: fadeIn 1.5s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Falling Hearts */
+        .heart-particle {
+            position: absolute;
+            top: -10%;
+            color: rgba(255, 255, 255, 0.6);
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong" autoplay>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="photo-container">
+            <img src="mowa.jpeg" alt="Our Picture">
+        </div>
+
+        <h1 style="color: black;">Love you Mowa</h1>
+        <div style="font-size: 3rem; animation: pulse 1.5s infinite; display: inline-block;">❤️</div>
+        <h2 style="color: black;">Missing you Mowa 🥺</h2>
+
+        <button class="btn-surprise" onclick="revealSurprise()">Click Here!</button>
+        
+        <div id="hidden-message" style="color: black;">
+            "Every moment without you feels like a lifetime. Can't wait to see you again! ✨"
+        </div>
+    </div>
+
+    <script>
+        // Falling hearts logic
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Surprise Button Logic
+        function revealSurprise() {
+            // Show message
+            document.getElementById('hidden-message').style.display = 'block';
+            
+            // Play Music
+            const song = document.getElementById('mySong');
+            song.play();
+
+            // Change button text
+            document.querySelector('.btn-surprise').innerText = "Playing for you... 🎵";
+        }
+    </script>
+
+    <style>
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+    </style>
+</body>
+</html>
